@@ -1,10 +1,11 @@
 package ru.danilaionov.schedule.api.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.danilaionov.schedule.api.models.Group;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,19 +15,12 @@ import java.util.List;
 @RequestMapping("/groups")
 public class GroupsController {
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     @RequestMapping
     public List<Group> get() {
-        List<Group> groups = new ArrayList<>();
-        groups.add(new Group(1, "v11"));
-        groups.add(new Group(2, "v12"));
-        groups.add(new Group(3, "v13"));
-        groups.add(new Group(4, "v21"));
-        groups.add(new Group(5, "v22"));
-        groups.add(new Group(6, "v31"));
-        groups.add(new Group(7, "v32"));
-        groups.add(new Group(8, "v41"));
-
-        return groups;
+        return jdbcTemplate.query("select group_id, group_name from dean_groups where group_use='T'",
+                (rs, rowNum) -> new Group(rs.getInt("group_id"), rs.getString("group_name")));
     }
-
 }
