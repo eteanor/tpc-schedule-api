@@ -1,6 +1,5 @@
 package ru.danilaionov.schedule.api.models;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -8,23 +7,23 @@ import java.util.List;
  */
 public class Day {
 
-    private Date date;
+    private int number;
     private List<Lesson> lessons;
 
     public Day() {
     }
 
-    public Day(Date date, List<Lesson> lessons) {
-        this.date = date;
+    public Day(int number, List<Lesson> lessons) {
+        this.number = number;
         this.lessons = lessons;
     }
 
-    public Date getDate() {
-        return date;
+    public int getNumber() {
+        return number;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public List<Lesson> getLessons() {
